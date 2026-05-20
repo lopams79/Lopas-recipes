@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipes — Lopa's Kitchen</title>
+  <meta name="description" content="Browse all of Lopa's recipes — Bengali classics, vegetarian dishes, desserts and more." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--ink);
+      padding: 3.5rem 2.5rem 3rem;
+      text-align: center;
+    }
+
+    .page-hero .section-eyebrow { color: var(--gold); }
+
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .page-hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 15px;
+      font-weight: 300;
+      margin-top: 0.75rem;
+    }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2.5rem;
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+    }
+
+    .filter-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-right: 0.4rem;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--ink-mid);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--sans);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--spice);
+      border-color: var(--spice);
+      color: #fff;
+    }
+
+    /* ── Recipe Section Heading ── */
+    .cat-heading {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .cat-heading .cat-emoji { font-size: 1.3rem; }
+
+    .recipe-section { margin-bottom: 3.5rem; }
+
+    /* ── Recipe Detail Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(28,20,16,0.65);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--cream);
+      border-radius: 10px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2rem 2.5rem;
+      position: relative;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--ink-light);
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: var(--spice); }
+
+    .modal-tag { margin-bottom: 0.5rem; }
+
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .modal-meta {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 13px;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-desc {
+      font-size: 15px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-section-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--spice-dark);
+    }
+
+    .modal ul, .modal ol {
+      padding-left: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal li {
+      font-size: 14px;
+      color: var(--ink-mid);
+      margin-bottom: 0.4rem;
+      line-height: 1.6;
+    }
+
+    .modal-note {
+      background: var(--spice-light);
+      border-left: 3px solid var(--spice);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 13px;
+      color: var(--ink-mid);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .filter-bar { top: 64px; padding: 0.75rem 1.2rem; }
+      .page-hero { padding: 2.5rem 1.2rem; }
+      .modal { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Lopa's <span>Kitchen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html" class="active">Recipes</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero fade-up">
+    <p class="section-eyebrow">All recipes</p>
+    <h1>From my kitchen, <em>to yours</em></h1>
+    <p>Bengali classics, everyday favourites, and a few sweet treats.</p>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterRecipes('all', this)">All</button>
+      <button class="filter-btn" onclick="filterRecipes('bengali', this)">Bengali</button>
+      <button class="filter-btn" onclick="filterRecipes('vegetarian', this)">Vegetarian</button>
+      <button class="filter-btn" onclick="filterRecipes('meat', this)">Meat &amp; Fish</button>
+      <button class="filter-btn" onclick="filterRecipes('dessert', this)">Desserts</button>
+      <button class="filter-btn" onclick="filterRecipes('quick', this)">Quick Meals</button>
+    </div>
+  </div>
+
+  <!-- Recipes -->
+  <div class="section">
+
+    <!-- Bengali Classics -->
+    <div class="recipe-section" data-category="bengali">
+      <h2 class="cat-heading"><span class="cat-emoji">🐟</span> Bengali Classics</h2>
+      <div class="recipe-grid">
+
+        <div class="recipe-card" onclick="openModal('shorshe-ilish')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#FDE8D8,#F5C4A0)">🐟</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Bengali Classic</span>
+            <h3 class="recipe-name">Shorshe Ilish</h3>
+            <p class="recipe-desc">Hilsa in mustard-poppy seed gravy. The smell of monsoon on a plate.</p>
+            <div class="recipe-meta"><span>⏱ 40 min</span><span>🍽 Serves 4</span><span>⭐ 4.9</span></div>
+          </div>
+        </div>
+
+        <div class="recipe-card" onclick="openModal('kosha-mangsho')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#D5E8F5,#A0C4E8)">🍖</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Bengali Classic</span>
+            <h3 class="recipe-name">Kosha Mangsho</h3>
+            <p class="recipe-desc">Slow-cooked mutton in a deep, caramelised onion and spice gravy.</p>
+            <div class="recipe-meta"><span>⏱ 90 min</span><span>🍽 Serves 6</span><span>⭐ 5.0</span></div>
+          </div>
+        </div>
+
+        <div class="recipe-card" onclick="openModal('cholar-dal')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#F5E8C4,#F2C96E)">🍛</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Bengali Classic</span>
+            <h3 class="recipe-name">Cholar Dal</h3>
+            <p class="recipe-desc">Chana dal with coconut, raisins, and a hit of ghee. Festive comfort food.</p>
+            <div class="recipe-meta"><span>⏱ 35 min</span><span>🍽 Serves 4</span><span>⭐ 4.7</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Vegetarian -->
+    <div class="recipe-section" data-category="vegetarian">
+      <h2 class="cat-heading"><span class="cat-emoji">🥬</span> Vegetarian</h2>
+      <div class="recipe-grid">
+
+        <div class="recipe-card" onclick="openModal('aloo-posto')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#D4EAD2,#A8D4A5)">🥔</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Vegetarian</span>
+            <h3 class="recipe-name">Aloo Posto</h3>
+            <p class="recipe-desc">Potatoes cooked with poppy seed paste. Simple, silky, and utterly addictive.</p>
+            <div class="recipe-meta"><span>⏱ 25 min</span><span>🍽 Serves 4</span><span>⭐ 4.8</span></div>
+          </div>
+        </div>
+
+        <div class="recipe-card" onclick="openModal('begun-bhaja')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#E8D5F5,#C4A0E8)">🍆</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Vegetarian</span>
+            <h3 class="recipe-name">Begun Bhaja</h3>
+            <p class="recipe-desc">Pan-fried aubergine with turmeric and cumin. A beloved Bengali side dish.</p>
+            <div class="recipe-meta"><span>⏱ 20 min</span><span>🍽 Serves 4</span><span>⭐ 4.6</span></div>
+          </div>
+        </div>
+
+        <div class="recipe-card" onclick="openModal('nimki')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#FAE8D8,#F5D4B0)">🫓</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Snack</span>
+            <h3 class="recipe-name">Nimki</h3>
+            <p class="recipe-desc">Crispy, diamond-shaped savoury biscuits. A tea-time staple in every Bengali home.</p>
+            <div class="recipe-meta"><span>⏱ 20 min</span><span>🍽 Makes ~40</span><span>⭐ 4.6</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Meat & Fish -->
+    <div class="recipe-section" data-category="meat">
+      <h2 class="cat-heading"><span class="cat-emoji">🍖</span> Meat &amp; Fish</h2>
+      <div class="recipe-grid">
+
+        <div class="recipe-card" onclick="openModal('mediterranean-fish-fry')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#D4EAF5,#8EC4E8)">🐟</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Meat &amp; Fish</span>
+            <h3 class="recipe-name">Mediterranean Fish Fry</h3>
+            <p class="recipe-desc">Tilapia fillets rubbed with smoky paprika, garlic, and herbs, pan-fried in olive oil. Well liked by all 3!</p>
+            <div class="recipe-meta"><span>⏱ 20 min</span><span>🍽 Serves 4</span><span>⭐ 5.0</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="recipe-section" data-category="dessert">
+      <h2 class="cat-heading"><span class="cat-emoji">🍮</span> Desserts</h2>
+      <div class="recipe-grid">
+
+        <div class="recipe-card" onclick="openModal('mishti-doi')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#F9E8C4,#F2C96E)">🍮</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Dessert</span>
+            <h3 class="recipe-name">Mishti Doi</h3>
+            <p class="recipe-desc">Sweet Bengali yogurt, gently caramelised and set overnight. A celebration in a bowl.</p>
+            <div class="recipe-meta"><span>⏱ 15 min + set</span><span>🍽 Serves 6</span><span>⭐ 5.0</span></div>
+          </div>
+        </div>
+
+        <div class="recipe-card" onclick="openModal('sandesh')">
+          <div class="recipe-card-thumb" style="background:linear-gradient(135deg,#FDE8D8,#F5D0C0)">🍬</div>
+          <div class="recipe-card-body">
+            <span class="recipe-tag">Dessert</span>
+            <h3 class="recipe-name">Sandesh</h3>
+            <p class="recipe-desc">Soft, fudgy sweets made from fresh chhana and cardamom. Melt-in-the-mouth perfection.</p>
+            <div class="recipe-meta"><span>⏱ 30 min</span><span>🍽 Makes 20</span><span>⭐ 4.9</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Recipe Modals -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModalOutside(event)">
+    <div class="modal" id="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-logo">Lopa's <span>Kitchen</span></p>
+    <p>© 2026 Lopamudra Sinharay &nbsp;·&nbsp; Made with ♥ and mustard oil</p>
+    <p style="margin-top:0.5rem; font-size:12px;">
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="recipes.html">Recipes</a> &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    const recipes = {
+      'shorshe-ilish': {
+        tag: 'Bengali Classic', emoji: '🐟',
+        name: 'Shorshe Ilish',
+        meta: ['⏱ 40 min', '🍽 Serves 4', '⭐ 4.9'],
+        desc: 'Hilsa fish in a fragrant mustard and poppy seed gravy — the quintessential Bengali monsoon dish. My mother made this every time it rained.',
+        ingredients: ['4 pieces hilsa fish, cleaned', '3 tbsp yellow mustard seeds', '1 tbsp poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp salt', '3 tbsp mustard oil', '½ cup water'],
+        steps: ['Grind mustard seeds, poppy seeds, and 2 green chillies with a little water into a smooth paste.', 'Marinate fish with ½ tsp turmeric and ½ tsp salt for 10 minutes.', 'Heat mustard oil in a pan until it just starts to smoke, then reduce heat.', 'Add the mustard-poppy paste, remaining turmeric, salt, and green chillies. Stir for 2 minutes.', 'Add water and bring to a gentle simmer. Slide in the fish pieces.', 'Cover and cook on low heat for 12–15 minutes until fish is cooked through.', 'Finish with a drizzle of raw mustard oil and serve with steamed rice.'],
+        note: 'The pungency of mustard oil is essential here — do not substitute. The fish should be just cooked, never overdone.'
+      },
+      'kosha-mangsho': {
+        tag: 'Bengali Classic', emoji: '🍖',
+        name: 'Kosha Mangsho',
+        meta: ['⏱ 90 min', '🍽 Serves 6', '⭐ 5.0'],
+        desc: 'Slow-cooked mutton in a deeply caramelised onion and spice gravy. This is the centrepiece of every Bengali celebration and Sunday lunch.',
+        ingredients: ['1 kg mutton, bone-in pieces', '3 large onions, finely sliced', '1 cup yogurt', '2 tbsp ginger-garlic paste', '1 tsp each: cumin, coriander, turmeric powder', '2 tsp red chilli powder', '4 green cardamoms, 2 bay leaves, 1 cinnamon stick', '4 tbsp mustard oil', 'Salt to taste'],
+        steps: ['Marinate mutton with yogurt, ginger-garlic paste, and all spice powders for at least 2 hours (overnight is best).', 'Heat oil in a heavy-bottomed pan. Add whole spices and let them splutter.', 'Add onions and cook on medium-low heat, stirring often, for 25–30 minutes until deep golden brown. This is the most important step — do not rush it.', 'Add the marinated mutton. Increase heat and stir-fry (bhuno) for 15 minutes until the oil separates from the masala.', 'Add ½ cup warm water, cover, and cook on low heat for 45 minutes, stirring occasionally.', 'The gravy should be thick and clinging to the meat. Serve with luchi or rice.'],
+        note: 'Kosha means "well-fried" — patience with the onions and the bhuno step is everything.'
+      },
+      'aloo-posto': {
+        tag: 'Vegetarian', emoji: '🥔',
+        name: 'Aloo Posto',
+        meta: ['⏱ 25 min', '🍽 Serves 4', '⭐ 4.8'],
+        desc: 'Potatoes cooked slowly with a paste of white poppy seeds. Deceptively simple, deeply comforting, and entirely Bengali.',
+        ingredients: ['4 medium potatoes, cubed', '3 tbsp white poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '3 tbsp mustard oil', '1 tsp nigella seeds (kalonji)'],
+        steps: ['Soak poppy seeds in water for 30 minutes, then grind with green chillies and a little water to a smooth paste.', 'Heat mustard oil, add nigella seeds, let them splutter.', 'Add potatoes, turmeric, and salt. Stir-fry on medium heat for 5 minutes.', 'Add the posto paste and sugar. Stir well to coat the potatoes.', 'Add 2–3 tbsp water, cover, and cook on low heat for 12–15 minutes until potatoes are tender.', 'The dish should be dry, not saucy. Serve with plain rice.'],
+        note: 'White poppy seeds (not opium poppy) are found at any South Asian grocery store. The sugar is non-negotiable — it balances the earthiness of the posto.'
+      },
+      'mishti-doi': {
+        tag: 'Dessert', emoji: '🍮',
+        name: 'Mishti Doi',
+        meta: ['⏱ 15 min + overnight', '🍽 Serves 6', '⭐ 5.0'],
+        desc: 'The pride of Bengal. Sweet, creamy, caramelised yogurt set overnight to a silky, thick perfection. No Bengali celebration is complete without it.',
+        ingredients: ['1 litre full-fat milk', '100g sugar', '2 tbsp jaggery (or brown sugar)', '3 tbsp existing yogurt (as starter)'],
+        steps: ['Heat milk in a heavy pan on low heat, stirring occasionally, until reduced to about 700ml (roughly 20 minutes).', 'In a separate small pan, dry-roast the sugar until it melts and turns a deep amber caramel. Watch carefully — do not let it burn.', 'Carefully pour the warm reduced milk into the caramel, stirring constantly. Add jaggery. Stir until smooth.', 'Let the mixture cool to body temperature (around 40°C — should feel just warm on your wrist).', 'Whisk in the yogurt starter until fully incorporated.', 'Pour into clay pots or a ceramic dish. Cover loosely and leave at room temperature overnight (8–10 hours) to set.', 'Refrigerate for at least 2 hours before serving.'],
+        note: 'Clay pots (matir haari) are traditional and give the best flavour. The deeper the caramel colour, the more complex the taste — but do not let it burn or it will be bitter.'
+      },
+      'cholar-dal': {
+        tag: 'Bengali Classic', emoji: '🍛',
+        name: 'Cholar Dal',
+        meta: ['⏱ 35 min', '🍽 Serves 4', '⭐ 4.7'],
+        desc: 'Chana dal tempered with ghee, coconut, and raisins. This is a festive dish, eaten on special occasions — but it is so good, I make it any Sunday.',
+        ingredients: ['200g chana dal (split chickpeas), soaked 1 hour', '50g fresh coconut, cut in small pieces', '2 tbsp raisins', '2 bay leaves, 2 dried red chillies', '1 tsp cumin seeds', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '2 tbsp ghee'],
+        steps: ['Boil soaked chana dal with turmeric and salt until just tender but not mushy (about 20 minutes). Drain excess water.', 'Heat ghee in a pan. Fry coconut pieces until lightly golden. Remove and set aside.', 'In the same ghee, add bay leaves, red chillies, and cumin seeds. Let them splutter.', 'Add the boiled dal, sugar, raisins, and fried coconut. Mix gently.', 'Cook on low heat for 5 minutes until everything is heated through and fragrant.', 'Serve with luchi (fried puffed bread) or plain rice.'],
+        note: 'Do not overcook the dal — it should hold its shape. The combination of coconut, raisin, and ghee is what makes this dish sing.'
+      },
+      'begun-bhaja': {
+        tag: 'Vegetarian', emoji: '🍆',
+        name: 'Begun Bhaja',
+        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 4.6'],
+        desc: 'Thick rounds of aubergine, seasoned and pan-fried until golden and caramelised. A simple Bengali side dish that somehow steals the show.',
+        ingredients: ['1 large aubergine, cut into 1cm rounds', '1 tsp turmeric', '1 tsp cumin powder', '½ tsp red chilli powder', 'Salt to taste', '3–4 tbsp mustard oil'],
+        steps: ['Mix turmeric, cumin, chilli powder, and salt together.', 'Coat both sides of each aubergine slice with the spice mixture. Let sit for 10 minutes.', 'Heat mustard oil in a wide pan over medium heat.', 'Fry the aubergine slices in a single layer for 4–5 minutes per side until deep golden and soft.', 'Serve immediately — they are best eaten hot and crisp.'],
+        note: 'Do not crowd the pan. Fry in batches if needed. The goal is caramelisation, not steaming.'
+      },
+      'nimki': {
+        tag: 'Snack', emoji: '🫓',
+        name: 'Nimki',
+        meta: ['⏱ 20 min + rest', '🍽 Makes ~40', '⭐ 4.6'],
+        desc: 'Crispy, flaky, diamond-shaped savoury biscuits, flavoured with kalonji. A staple at every Bengali tea-time and festive tin.',
+        ingredients: ['200g plain flour', '2 tbsp ghee or butter', '½ tsp kalonji (nigella seeds)', '½ tsp salt', '½ tsp sugar', 'Cold water to knead', 'Oil for deep frying'],
+        steps: ['Mix flour, ghee, kalonji, salt, and sugar. Rub the ghee into the flour with your fingers until it resembles breadcrumbs.', 'Add cold water gradually and knead into a firm (not soft) dough. Cover and rest for 20 minutes.', 'Roll out the dough thinly (2–3mm). Cut into diamond shapes using a knife.', 'Heat oil in a deep pan to 160°C — medium heat. You want a slow fry.', 'Fry the nimki in small batches, turning occasionally, until pale golden and crisp (about 5–7 minutes).', 'Drain on paper towels. They will crisp further as they cool.', 'Store in an airtight tin for up to 2 weeks.'],
+        note: 'The key to nimki is patience — low and slow frying gives the trademark crispness. If the oil is too hot they brown before crisping through.'
+      },
+      'mediterranean-fish-fry': {
+        tag: 'Meat & Fish', emoji: '🐟',
+        name: 'Mediterranean Fish Fry',
+        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 5.0'],
+        desc: 'Tilapia fillets coated in a smoky, herb-spiced rub and pan-fried in olive oil until golden. Quick, fragrant, and — as the recipe card says — well liked by all 3. Serve with tzatziki for a fresh finish.',
+        ingredients: ['4 tilapia fillets', '1 tsp paprika', '1 tsp smoked paprika', '1 tsp garlic powder', '1 tsp dried thyme', '1 tsp dried oregano', 'Salt to taste', '2–3 tbsp olive oil (for the rub, plus a little extra for frying)'],
+        steps: ['Wash the fish fillets and pat them completely dry with kitchen paper — this helps the spice rub stick and gives a better crust.', 'Mix together the paprika, smoked paprika, garlic powder, dried thyme, dried oregano, and salt in a small bowl.', 'Add enough olive oil to the spice mix to make a thick paste (about 1–2 tbsp). Stir well.', 'Rub the spice paste all over both sides of each fillet. Let them sit for 5–10 minutes to absorb the flavours.', 'Heat a little olive oil in a non-stick frying pan over medium-high heat. When hot, add the fillets.', 'Fry for 3–4 minutes per side without moving them, until golden and cooked through. The fish is ready when it flakes easily with a fork.', 'Serve immediately with tzatziki sauce and a simple salad or warm flatbread.'],
+        note: 'Tilapia cooks quickly — do not overcook or it will dry out. The smoked paprika is what gives this dish its depth, so do not skip it in favour of plain paprika alone.'
+      },
+      'sandesh': {
+        tag: 'Dessert', emoji: '🍬',
+        name: 'Sandesh',
+        meta: ['⏱ 30 min', '🍽 Makes 20', '⭐ 4.9'],
+        desc: 'Soft, delicate sweets made from fresh chhana (paneer) and just enough sugar. The purest expression of Bengali sweet-making.',
+        ingredients: ['1 litre full-fat milk', '3 tbsp lemon juice or white vinegar', '80g icing sugar (adjust to taste)', '½ tsp cardamom powder', 'A few strands of saffron (optional)', 'Pistachios to garnish'],
+        steps: ['Bring milk to a boil. Add lemon juice gradually, stirring, until the milk curdles completely. Stop adding acid once the whey is clear.', 'Strain through a muslin cloth. Rinse the chhana under cold water to remove sourness. Squeeze well.', 'Hang the chhana in the cloth for 30 minutes until most moisture is removed.', 'Knead the chhana on a clean surface with the heel of your palm for 8–10 minutes until completely smooth and pliable.', 'Place in a heavy pan over very low heat. Add icing sugar and cardamom. Stir constantly for 5–7 minutes until the mixture comes together and leaves the sides of the pan. Do not overcook.', 'Cool slightly, then shape into small rounds or press into moulds. Garnish with a pistachio.', 'Refrigerate for 1–2 hours before serving. Best eaten the same day.'],
+        note: 'The texture of the finished sandesh depends entirely on how long you knead the chhana and how you cook it. Undercook it for a softer, fudgier result; cook a little longer for a firmer sweet.'
+      }
+    };
+
+    function openModal(id) {
+      const r = recipes[id];
+      if (!r) return;
+      document.getElementById('modal-body').innerHTML = `
+        <div class="modal-tag"><span class="recipe-tag">${r.tag}</span></div>
+        <h2 class="modal-title">${r.emoji} ${r.name}</h2>
+        <div class="modal-meta">${r.meta.map(m => `<span>${m}</span>`).join('')}</div>
+        <p class="modal-desc">${r.desc}</p>
+        <p class="modal-section-title">Ingredients</p>
+        <ul>${r.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+        <p class="modal-section-title">Method</p>
+        <ol>${r.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+        ${r.note ? `<div class="modal-note">💡 ${r.note}</div>` : ''}
+      `;
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOutside(e) {
+      if (e.target === document.getElementById('modal-overlay')) closeModal();
+    }
+
+    function filterRecipes(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.recipe-section').forEach(sec => {
+        sec.style.display = (cat === 'all' || sec.dataset.category === cat) ? '' : 'none';
+      });
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>

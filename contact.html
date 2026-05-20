@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Lopa's Kitchen</title>
+  <meta name="description" content="Get in touch with Lopamudra Sinharay — recipe questions, suggestions, or just to say hello." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-hero {
+      background: var(--ink);
+      padding: 4rem 2.5rem 3rem;
+      text-align: center;
+    }
+
+    .page-hero .section-eyebrow { color: var(--gold); }
+
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .page-hero h1 em { color: var(--gold); font-style: italic; }
+
+    .page-hero p {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      font-weight: 300;
+      margin-top: 0.75rem;
+    }
+
+    /* ── Contact layout ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    /* ── Form ── */
+    .contact-form-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .contact-form-card h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-form-card .form-sub {
+      font-size: 14px;
+      color: var(--ink-light);
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+    }
+
+    .form-row { margin-bottom: 1.25rem; }
+
+    .form-row label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color var(--transition);
+      appearance: none;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: var(--spice);
+      background: #fff;
+    }
+
+    .form-row textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-submit {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .success-msg {
+      display: none;
+      background: #EAF6EE;
+      border: 1px solid #89CCA0;
+      color: #2C6B40;
+      border-radius: var(--radius);
+      padding: 0.85rem 1.2rem;
+      font-size: 14px;
+      margin-top: 1rem;
+    }
+
+    /* ── Sidebar ── */
+    .contact-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .info-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .info-card h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .info-card p {
+      font-size: 14px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .contact-list { list-style: none; margin-top: 1rem; }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 14px;
+      color: var(--ink-mid);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-list .c-icon { font-size: 18px; flex-shrink: 0; }
+
+    .faq-item { margin-bottom: 1rem; }
+    .faq-q {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .contact-form-card { padding: 1.5rem; }
+      .page-hero { padding: 2.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Lopa's <span>Kitchen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero fade-up">
+    <p class="section-eyebrow">Get in touch</p>
+    <h1>Say <em>hello</em></h1>
+    <p>Questions, recipe requests, or just want to share how a dish turned out? I'd love to hear from you.</p>
+  </div>
+
+  <div class="section">
+    <div class="contact-grid">
+
+      <!-- Contact Form -->
+      <div class="contact-form-card fade-up fade-up-1">
+        <h2>Send a message</h2>
+        <p class="form-sub">I read every message and try to reply within a few days.</p>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="fname">First name</label>
+            <input type="text" id="fname" placeholder="Your name" />
+          </div>
+          <div class="form-row">
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" placeholder="Your last name" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-row">
+          <label for="subject">Subject</label>
+          <select id="subject">
+            <option value="">Please select…</option>
+            <option>Recipe question</option>
+            <option>Ingredient substitution</option>
+            <option>Recipe request</option>
+            <option>Just saying hello!</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me what's on your mind…"></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" onclick="submitForm()">Send message →</button>
+        </div>
+
+        <div class="success-msg" id="success-msg">
+          🎉 Thank you! Your message has been sent. I'll be in touch soon.
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="contact-sidebar fade-up fade-up-2">
+
+        <div class="info-card">
+          <h3>Good to know</h3>
+          <p>This site is a personal project — a labour of love, not a business. I reply to messages in my own time, usually within a few days.</p>
+          <ul class="contact-list">
+            <li><span class="c-icon">⏱</span> Usually replies in 2–3 days</li>
+            <li><span class="c-icon">🌍</span> Happy to hear from anywhere</li>
+            <li><span class="c-icon">🍳</span> Recipe questions always welcome</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Frequently asked</h3>
+          <div class="faq-item">
+            <p class="faq-q">Can I suggest a recipe?</p>
+            <p class="faq-a">Absolutely — especially if it's a Bengali dish I might have missed. Use the form and select "Recipe request".</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">I can't find an ingredient — what do I substitute?</p>
+            <p class="faq-a">Send me a message with the recipe and what you have available. I'll do my best to help.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Can I share your recipes?</p>
+            <p class="faq-a">Yes, with credit please! A link back to this site is always appreciated.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-logo">Lopa's <span>Kitchen</span></p>
+    <p>© 2026 Lopamudra Sinharay &nbsp;·&nbsp; Made with ♥ and mustard oil</p>
+    <p style="margin-top:0.5rem; font-size:12px;">
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="recipes.html">Recipes</a> &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    function submitForm() {
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!email || !message) {
+        alert('Please fill in at least your email and message.');
+        return;
+      }
+      document.getElementById('success-msg').style.display = 'block';
+      document.getElementById('message').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('subject').value = '';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Lopa's Kitchen</title>
+  <meta name="description" content="The story behind Lopa's Kitchen — Lopamudra Sinharay's love of Bengali cooking and memory." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-hero {
+      background: var(--spice-light);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2.5rem 3rem;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--spice); }
+
+    /* ── Two-column layout ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── Profile card ── */
+    .profile-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 84px;
+    }
+
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--spice-light), #E8B090);
+      border: 4px solid var(--spice-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      color: var(--spice-dark);
+      margin: 0 auto 1.2rem;
+    }
+
+    .profile-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-tagline {
+      font-size: 13px;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .profile-divider {
+      width: 32px;
+      height: 1.5px;
+      background: var(--spice);
+      margin: 0 auto 1.2rem;
+    }
+
+    .profile-facts {
+      list-style: none;
+      text-align: left;
+    }
+
+    .profile-facts li {
+      font-size: 13px;
+      color: var(--ink-mid);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .profile-facts li:last-child { border-bottom: none; }
+    .profile-facts .fact-icon { font-size: 15px; flex-shrink: 0; }
+
+    /* ── Story text ── */
+    .story h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .story h2:first-child { margin-top: 0; }
+
+    .story p {
+      font-size: 15.5px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+
+    .story .pull-quote {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--spice-dark);
+      border-left: 3px solid var(--spice);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.5;
+    }
+
+    /* ── Favourite ingredients ── */
+    .ingredients-strip {
+      background: var(--ink);
+      padding: 3rem 2.5rem;
+      margin: 2rem 0 0;
+    }
+
+    .ingredients-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .ingredients-strip .section-eyebrow { color: var(--gold); }
+
+    .ingredients-strip h2 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .ing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .ing-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .ing-card .ing-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+    .ing-card .ing-name { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.05em; }
+    .ing-card .ing-note { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .profile-card { position: static; }
+      .page-hero { padding: 2.5rem 1.2rem; }
+      .ingredients-strip { padding: 2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Lopa's <span>Kitchen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero fade-up">
+    <p class="section-eyebrow">My story</p>
+    <h1>The woman behind<br><em>the mustard oil</em></h1>
+  </div>
+
+  <div class="section">
+    <div class="about-grid">
+
+      <!-- Profile Card -->
+      <aside class="profile-card fade-up fade-up-1">
+        <div class="profile-avatar">L</div>
+        <p class="profile-name">Lopamudra Sinharay</p>
+        <p class="profile-tagline">"Lopa" · Home cook &amp; keeper of family recipes</p>
+        <div class="profile-divider"></div>
+        <ul class="profile-facts">
+          <li><span class="fact-icon">📍</span> Originally from West Bengal</li>
+          <li><span class="fact-icon">🌶️</span> Speciality: Bengali classics</li>
+          <li><span class="fact-icon">🐟</span> Favourite dish: Shorshe Ilish</li>
+          <li><span class="fact-icon">☕</span> Always cooking with tea nearby</li>
+          <li><span class="fact-icon">📖</span> Recipes learned: by heart</li>
+        </ul>
+      </aside>
+
+      <!-- Story -->
+      <div class="story fade-up fade-up-2">
+        <h2>Where it all began</h2>
+        <p>I grew up in a household where the kitchen was the centre of everything. My mother cooked without recipes, without measurements — a handful of this, a pinch of that, a glance at the pot and somehow everything was perfect. I spent years watching her, trying to absorb it all without knowing I was doing it.</p>
+        <p>It was only when I moved away from home that I understood what those hours in the kitchen had given me. Not just recipes, but a language — a way of expressing care, nostalgia, and belonging through food.</p>
+
+        <div class="pull-quote">"The smell of mustard oil in a hot pan takes me home every single time."</div>
+
+        <h2>Why I started this site</h2>
+        <p>The truth is, I was worried. Worried that the recipes I grew up with — the ones that live in memory and muscle, not in any book — would one day be lost. My mother never wrote them down. Her mother never wrote them down. And so I decided to do it for them.</p>
+        <p>Every recipe on this site comes with the best of my memory and the honest admission that there is no single "correct" version. My Aloo Posto will be slightly different from yours, and both will be right. That is the nature of home cooking — it lives and breathes and changes with each pair of hands.</p>
+
+        <h2>What you'll find here</h2>
+        <p>Mostly Bengali food — the cuisine I know best and love most deeply. Fish cooked in mustard. Dal fragrant with ghee and coconut. Sweets that take patience. But also the everyday dishes: quick weeknight meals, tea-time snacks, things I make when I miss home and need comfort fast.</p>
+        <p>Each recipe is tested in my kitchen, written as clearly as I can manage, and accompanied by whatever notes I think will actually help. I hope you find something here that makes its way into your regular rotation — and into your memory too.</p>
+
+        <a href="recipes.html" class="btn btn-primary" style="margin-top: 0.5rem;">Browse all recipes →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Favourite Ingredients -->
+  <div class="ingredients-strip">
+    <div class="ingredients-inner">
+      <p class="section-eyebrow">The essentials</p>
+      <h2>My favourite ingredients</h2>
+      <div class="ing-grid">
+        <div class="ing-card">
+          <div class="ing-emoji">🫙</div>
+          <div class="ing-name">Mustard Oil</div>
+          <div class="ing-note">The soul of Bengali cooking</div>
+        </div>
+        <div class="ing-card">
+          <div class="ing-emoji">🌿</div>
+          <div class="ing-name">Posto</div>
+          <div class="ing-note">White poppy seeds</div>
+        </div>
+        <div class="ing-card">
+          <div class="ing-emoji">🌾</div>
+          <div class="ing-name">Panch Phoron</div>
+          <div class="ing-note">Bengali five-spice blend</div>
+        </div>
+        <div class="ing-card">
+          <div class="ing-emoji">🐟</div>
+          <div class="ing-name">Hilsa Fish</div>
+          <div class="ing-note">The king of Bengali fish</div>
+        </div>
+        <div class="ing-card">
+          <div class="ing-emoji">🟤</div>
+          <div class="ing-name">Jaggery</div>
+          <div class="ing-note">Unrefined cane sugar</div>
+        </div>
+        <div class="ing-card">
+          <div class="ing-emoji">🧄</div>
+          <div class="ing-name">Turmeric</div>
+          <div class="ing-note">In almost everything</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-logo">Lopa's <span>Kitchen</span></p>
+    <p>© 2026 Lopamudra Sinharay &nbsp;·&nbsp; Made with ♥ and mustard oil</p>
+    <p style="margin-top:0.5rem; font-size:12px;">
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="recipes.html">Recipes</a> &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>

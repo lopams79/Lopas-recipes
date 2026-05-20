@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lopa's Kitchen — Home</title>
+  <meta name="description" content="Bengali home cooking by Lopamudra Sinharay. Recipes full of flavour, memory, and mustard oil." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hero ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 3rem 4rem 2.5rem;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--spice);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 420px;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-visual {
+      background: var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 110px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(201,150,58,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 70%, rgba(184,92,56,0.12) 0%, transparent 55%);
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 28px,
+        rgba(184,92,56,0.04) 28px, rgba(184,92,56,0.04) 29px
+      ),
+      repeating-linear-gradient(
+        90deg, transparent, transparent 28px,
+        rgba(184,92,56,0.04) 28px, rgba(184,92,56,0.04) 29px
+      );
+    }
+
+    .hero-emoji { position: relative; z-index: 1; }
+
+    /* ── Featured Recipes ── */
+    .featured-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Categories Strip ── */
+    .categories {
+      background: var(--ink);
+      padding: 2.5rem;
+    }
+
+    .categories-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .categories-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .cat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .cat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 40px;
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .cat-pill:hover {
+      background: var(--spice);
+      border-color: var(--spice);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .cat-pill-icon { font-size: 18px; }
+
+    /* ── Quote strip ── */
+    .quote-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      background: var(--spice-light);
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-style: italic;
+      color: var(--ink);
+      max-width: 680px;
+      margin: 0 auto 0.75rem;
+      line-height: 1.5;
+    }
+
+    .quote-attr {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--spice);
+    }
+
+    /* ── About Teaser ── */
+    .about-teaser {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+    }
+
+    .avatar-large {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--spice-light), #E8B090);
+      border: 3px solid var(--spice-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--spice-dark);
+      flex-shrink: 0;
+    }
+
+    .about-teaser-text p {
+      color: var(--ink-mid);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 200px; font-size: 70px; }
+      .hero-text { padding: 2.5rem 1.2rem; }
+      .featured-header { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+      .about-teaser { grid-template-columns: 1fr; text-align: center; }
+      .avatar-large { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Lopa's <span>Kitchen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text fade-up">
+      <p class="section-eyebrow">Welcome to my kitchen</p>
+      <h1 class="hero-headline">Cooking with<br><em>love &amp; stories</em></h1>
+      <p class="hero-sub">Hi, I'm Lopa — I cook Bengali classics, seasonal favourites, and everything in between. Every recipe here comes with a memory.</p>
+      <div class="hero-buttons">
+        <a href="recipes.html" class="btn btn-primary">Browse Recipes</a>
+        <a href="about.html" class="btn btn-outline">About Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-pattern"></div>
+      <div class="hero-emoji">🍲</div>
+    </div>
+  </section>
+
+  <!-- Featured Recipes -->
+  <div class="section">
+    <div class="featured-header">
+      <div>
+        <p class="section-eyebrow">Fresh from the stove</p>
+        <h2 class="section-title">Featured Recipes</h2>
+      </div>
+      <a href="recipes.html" class="btn btn-outline" style="white-space:nowrap">See all recipes →</a>
+    </div>
+
+    <div class="recipe-grid">
+      <a href="recipes.html" class="recipe-card fade-up fade-up-1">
+        <div class="recipe-card-thumb" style="background: linear-gradient(135deg, #FDE8D8, #F5C4A0);">🐟</div>
+        <div class="recipe-card-body">
+          <span class="recipe-tag">Bengali Classic</span>
+          <h3 class="recipe-name">Shorshe Ilish</h3>
+          <p class="recipe-desc">Hilsa fish in a fragrant mustard-poppy seed gravy. The quintessential Bengali monsoon dish.</p>
+          <div class="recipe-meta">
+            <span>⏱ 40 min</span>
+            <span>🍽 Serves 4</span>
+            <span>⭐ 4.9</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="recipes.html" class="recipe-card fade-up fade-up-2">
+        <div class="recipe-card-thumb" style="background: linear-gradient(135deg, #D4EAD2, #A8D4A5);">🥔</div>
+        <div class="recipe-card-body">
+          <span class="recipe-tag">Vegetarian</span>
+          <h3 class="recipe-name">Aloo Posto</h3>
+          <p class="recipe-desc">Potatoes slow-cooked with poppy seed paste. Simple, comforting, and impossible to stop eating.</p>
+          <div class="recipe-meta">
+            <span>⏱ 25 min</span>
+            <span>🍽 Serves 4</span>
+            <span>⭐ 4.8</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="recipes.html" class="recipe-card fade-up fade-up-3">
+        <div class="recipe-card-thumb" style="background: linear-gradient(135deg, #F5E8C4, #F2C96E);">🍮</div>
+        <div class="recipe-card-body">
+          <span class="recipe-tag">Dessert</span>
+          <h3 class="recipe-name">Mishti Doi</h3>
+          <p class="recipe-desc">Sweet Bengali yogurt, caramelised and set to a silky-smooth finish. A celebration in a bowl.</p>
+          <div class="recipe-meta">
+            <span>⏱ 15 min + set</span>
+            <span>🍽 Serves 6</span>
+            <span>⭐ 5.0</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="categories">
+    <div class="categories-inner">
+      <p class="categories-title">Browse by category</p>
+      <div class="cat-pills">
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">🐟</span> Bengali Classics</a>
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">🥬</span> Vegetarian</a>
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">🍖</span> Meat &amp; Fish</a>
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">🍮</span> Desserts</a>
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">⚡</span> Quick Meals</a>
+        <a href="recipes.html" class="cat-pill"><span class="cat-pill-icon">🫙</span> Chutneys &amp; Sides</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-strip">
+    <p class="quote-text">"The smell of mustard oil in a hot pan takes me home every single time."</p>
+    <p class="quote-attr">— Lopamudra Sinharay</p>
+  </div>
+
+  <!-- About Teaser -->
+  <div class="section">
+    <div class="about-teaser">
+      <div class="avatar-large">L</div>
+      <div class="about-teaser-text">
+        <p>I grew up watching my mother cook without measurements — a handful of this, a pinch of that — and this site is my way of writing those recipes down before the memories fade. I hope they bring as much warmth to your table as they do to mine.</p>
+        <a href="about.html" class="btn btn-outline">Read my story →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-logo">Lopa's <span>Kitchen</span></p>
+    <p>© 2026 Lopamudra Sinharay &nbsp;·&nbsp; Made with ♥ and mustard oil</p>
+    <p style="margin-top:0.5rem; font-size:12px;">
+      <a href="index.html">Home</a> &nbsp;·&nbsp;
+      <a href="recipes.html">Recipes</a> &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>
