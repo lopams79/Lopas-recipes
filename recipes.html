@@ -386,14 +386,41 @@
 
   <script>
     const recipes = {
-      'shorshe-ilish': {
-        tag: 'Bengali Classic', emoji: '🐟',
-        name: 'Shorshe Ilish',
-        meta: ['⏱ 40 min', '🍽 Serves 4', '⭐ 4.9'],
-        desc: 'Hilsa fish in a fragrant mustard and poppy seed gravy — the quintessential Bengali monsoon dish. My mother made this every time it rained.',
-        ingredients: ['4 pieces hilsa fish, cleaned', '3 tbsp yellow mustard seeds', '1 tbsp poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp salt', '3 tbsp mustard oil', '½ cup water'],
-        steps: ['Grind mustard seeds, poppy seeds, and 2 green chillies with a little water into a smooth paste.', 'Marinate fish with ½ tsp turmeric and ½ tsp salt for 10 minutes.', 'Heat mustard oil in a pan until it just starts to smoke, then reduce heat.', 'Add the mustard-poppy paste, remaining turmeric, salt, and green chillies. Stir for 2 minutes.', 'Add water and bring to a gentle simmer. Slide in the fish pieces.', 'Cover and cook on low heat for 12–15 minutes until fish is cooked through.', 'Finish with a drizzle of raw mustard oil and serve with steamed rice.'],
-        note: 'The pungency of mustard oil is essential here — do not substitute. The fish should be just cooked, never overdone.'
+       'aloo-posto': {
+        tag: 'Vegetarian', emoji: '🥔',
+        name: 'Aloo Posto',
+        meta: ['⏱ 25 min', '🍽 Serves 4', '⭐ 4.8'],
+        desc: 'Potatoes cooked slowly with a paste of white poppy seeds. Deceptively simple, deeply comforting, and entirely Bengali.',
+        ingredients: ['4 medium potatoes, cubed', '3 tbsp white poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '3 tbsp mustard oil', '1 tsp nigella seeds (kalonji)'],
+        steps: ['Soak poppy seeds in water for 30 minutes, then grind with green chillies and a little water to a smooth paste.', 'Heat mustard oil, add nigella seeds, let them splutter.', 'Add potatoes, turmeric, and salt. Stir-fry on medium heat for 5 minutes.', 'Add the posto paste and sugar. Stir well to coat the potatoes.', 'Add 2–3 tbsp water, cover, and cook on low heat for 12–15 minutes until potatoes are tender.', 'The dish should be dry, not saucy. Serve with plain rice.'],
+        note: 'White poppy seeds (not opium poppy) are found at any South Asian grocery store. The sugar is non-negotiable — it balances the earthiness of the posto.'
+      },
+       'begun-bhaja': {
+        tag: 'Vegetarian', emoji: '🍆',
+        name: 'Begun Bhaja',
+        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 4.6'],
+        desc: 'Thick rounds of aubergine, seasoned and pan-fried until golden and caramelised. A simple Bengali side dish that somehow steals the show.',
+        ingredients: ['1 large aubergine, cut into 1cm rounds', '1 tsp turmeric', '1 tsp cumin powder', '½ tsp red chilli powder', 'Salt to taste', '3–4 tbsp mustard oil'],
+        steps: ['Mix turmeric, cumin, chilli powder, and salt together.', 'Coat both sides of each aubergine slice with the spice mixture. Let sit for 10 minutes.', 'Heat mustard oil in a wide pan over medium heat.', 'Fry the aubergine slices in a single layer for 4–5 minutes per side until deep golden and soft.', 'Serve immediately — they are best eaten hot and crisp.'],
+        note: 'Do not crowd the pan. Fry in batches if needed. The goal is caramelisation, not steaming.'
+      },
+       'cholar-dal': {
+        tag: 'Bengali Classic', emoji: '🍛',
+        name: 'Cholar Dal',
+        meta: ['⏱ 35 min', '🍽 Serves 4', '⭐ 4.7'],
+        desc: 'Chana dal tempered with ghee, coconut, and raisins. This is a festive dish, eaten on special occasions — but it is so good, I make it any Sunday.',
+        ingredients: ['200g chana dal (split chickpeas), soaked 1 hour', '50g fresh coconut, cut in small pieces', '2 tbsp raisins', '2 bay leaves, 2 dried red chillies', '1 tsp cumin seeds', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '2 tbsp ghee'],
+        steps: ['Boil soaked chana dal with turmeric and salt until just tender but not mushy (about 20 minutes). Drain excess water.', 'Heat ghee in a pan. Fry coconut pieces until lightly golden. Remove and set aside.', 'In the same ghee, add bay leaves, red chillies, and cumin seeds. Let them splutter.', 'Add the boiled dal, sugar, raisins, and fried coconut. Mix gently.', 'Cook on low heat for 5 minutes until everything is heated through and fragrant.', 'Serve with luchi (fried puffed bread) or plain rice.'],
+        note: 'Do not overcook the dal — it should hold its shape. The combination of coconut, raisin, and ghee is what makes this dish sing.'
+      },
+      'exploding egg': {
+        tag: 'Dumb and dumber', emoji: '',
+        name: 'Microwaved Egg',
+        meta: ['⏱ 5 min', '🍽 Serves 0', '⭐ 4.7'],
+        desc: 'Good if you have a naughty visitor who you want to scare.',
+        ingredients: ['One egg', 'Some water'],
+        steps: ['Put the egg and water in a bowl and put in microwave. Cook for 2 minutes and then--BOOM--the egg explodes and the naughty kid gets a scare of their life'],
+        note: 'You can try more than one egg at your own risk.'
       },
       'kosha-mangsho': {
         tag: 'Bengali Classic', emoji: '🍖',
@@ -404,14 +431,14 @@
         steps: ['Marinate mutton with yogurt, ginger-garlic paste, and all spice powders for at least 2 hours (overnight is best).', 'Heat oil in a heavy-bottomed pan. Add whole spices and let them splutter.', 'Add onions and cook on medium-low heat, stirring often, for 25–30 minutes until deep golden brown. This is the most important step — do not rush it.', 'Add the marinated mutton. Increase heat and stir-fry (bhuno) for 15 minutes until the oil separates from the masala.', 'Add ½ cup warm water, cover, and cook on low heat for 45 minutes, stirring occasionally.', 'The gravy should be thick and clinging to the meat. Serve with luchi or rice.'],
         note: 'Kosha means "well-fried" — patience with the onions and the bhuno step is everything.'
       },
-      'aloo-posto': {
-        tag: 'Vegetarian', emoji: '🥔',
-        name: 'Aloo Posto',
-        meta: ['⏱ 25 min', '🍽 Serves 4', '⭐ 4.8'],
-        desc: 'Potatoes cooked slowly with a paste of white poppy seeds. Deceptively simple, deeply comforting, and entirely Bengali.',
-        ingredients: ['4 medium potatoes, cubed', '3 tbsp white poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '3 tbsp mustard oil', '1 tsp nigella seeds (kalonji)'],
-        steps: ['Soak poppy seeds in water for 30 minutes, then grind with green chillies and a little water to a smooth paste.', 'Heat mustard oil, add nigella seeds, let them splutter.', 'Add potatoes, turmeric, and salt. Stir-fry on medium heat for 5 minutes.', 'Add the posto paste and sugar. Stir well to coat the potatoes.', 'Add 2–3 tbsp water, cover, and cook on low heat for 12–15 minutes until potatoes are tender.', 'The dish should be dry, not saucy. Serve with plain rice.'],
-        note: 'White poppy seeds (not opium poppy) are found at any South Asian grocery store. The sugar is non-negotiable — it balances the earthiness of the posto.'
+       'mediterranean-fish-fry': {
+        tag: 'Meat & Fish', emoji: '🐟',
+        name: 'Mediterranean Fish Fry',
+        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 5.0'],
+        desc: 'Tilapia fillets coated in a smoky, herb-spiced rub and pan-fried in olive oil until golden. Quick, fragrant, and — as the recipe card says — well liked by all 3. Serve with tzatziki for a fresh finish.',
+        ingredients: ['4 tilapia fillets', '1 tsp paprika', '1 tsp smoked paprika', '1 tsp garlic powder', '1 tsp dried thyme', '1 tsp dried oregano', 'Salt to taste', '2–3 tbsp olive oil (for the rub, plus a little extra for frying)'],
+        steps: ['Wash the fish fillets and pat them completely dry with kitchen paper — this helps the spice rub stick and gives a better crust.', 'Mix together the paprika, smoked paprika, garlic powder, dried thyme, dried oregano, and salt in a small bowl.', 'Add enough olive oil to the spice mix to make a thick paste (about 1–2 tbsp). Stir well.', 'Rub the spice paste all over both sides of each fillet. Let them sit for 5–10 minutes to absorb the flavours.', 'Heat a little olive oil in a non-stick frying pan over medium-high heat. When hot, add the fillets.', 'Fry for 3–4 minutes per side without moving them, until golden and cooked through. The fish is ready when it flakes easily with a fork.', 'Serve immediately with tzatziki sauce and a simple salad or warm flatbread.'],
+        note: 'Tilapia cooks quickly — do not overcook or it will dry out. The smoked paprika is what gives this dish its depth, so do not skip it in favour of plain paprika alone.'
       },
       'mishti-doi': {
         tag: 'Dessert', emoji: '🍮',
@@ -422,24 +449,6 @@
         steps: ['Heat milk in a heavy pan on low heat, stirring occasionally, until reduced to about 700ml (roughly 20 minutes).', 'In a separate small pan, dry-roast the sugar until it melts and turns a deep amber caramel. Watch carefully — do not let it burn.', 'Carefully pour the warm reduced milk into the caramel, stirring constantly. Add jaggery. Stir until smooth.', 'Let the mixture cool to body temperature (around 40°C — should feel just warm on your wrist).', 'Whisk in the yogurt starter until fully incorporated.', 'Pour into clay pots or a ceramic dish. Cover loosely and leave at room temperature overnight (8–10 hours) to set.', 'Refrigerate for at least 2 hours before serving.'],
         note: 'Clay pots (matir haari) are traditional and give the best flavour. The deeper the caramel colour, the more complex the taste — but do not let it burn or it will be bitter.'
       },
-      'cholar-dal': {
-        tag: 'Bengali Classic', emoji: '🍛',
-        name: 'Cholar Dal',
-        meta: ['⏱ 35 min', '🍽 Serves 4', '⭐ 4.7'],
-        desc: 'Chana dal tempered with ghee, coconut, and raisins. This is a festive dish, eaten on special occasions — but it is so good, I make it any Sunday.',
-        ingredients: ['200g chana dal (split chickpeas), soaked 1 hour', '50g fresh coconut, cut in small pieces', '2 tbsp raisins', '2 bay leaves, 2 dried red chillies', '1 tsp cumin seeds', '1 tsp turmeric', '1 tsp sugar', 'Salt to taste', '2 tbsp ghee'],
-        steps: ['Boil soaked chana dal with turmeric and salt until just tender but not mushy (about 20 minutes). Drain excess water.', 'Heat ghee in a pan. Fry coconut pieces until lightly golden. Remove and set aside.', 'In the same ghee, add bay leaves, red chillies, and cumin seeds. Let them splutter.', 'Add the boiled dal, sugar, raisins, and fried coconut. Mix gently.', 'Cook on low heat for 5 minutes until everything is heated through and fragrant.', 'Serve with luchi (fried puffed bread) or plain rice.'],
-        note: 'Do not overcook the dal — it should hold its shape. The combination of coconut, raisin, and ghee is what makes this dish sing.'
-      },
-      'begun-bhaja': {
-        tag: 'Vegetarian', emoji: '🍆',
-        name: 'Begun Bhaja',
-        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 4.6'],
-        desc: 'Thick rounds of aubergine, seasoned and pan-fried until golden and caramelised. A simple Bengali side dish that somehow steals the show.',
-        ingredients: ['1 large aubergine, cut into 1cm rounds', '1 tsp turmeric', '1 tsp cumin powder', '½ tsp red chilli powder', 'Salt to taste', '3–4 tbsp mustard oil'],
-        steps: ['Mix turmeric, cumin, chilli powder, and salt together.', 'Coat both sides of each aubergine slice with the spice mixture. Let sit for 10 minutes.', 'Heat mustard oil in a wide pan over medium heat.', 'Fry the aubergine slices in a single layer for 4–5 minutes per side until deep golden and soft.', 'Serve immediately — they are best eaten hot and crisp.'],
-        note: 'Do not crowd the pan. Fry in batches if needed. The goal is caramelisation, not steaming.'
-      },
       'nimki': {
         tag: 'Snack', emoji: '🫓',
         name: 'Nimki',
@@ -449,15 +458,6 @@
         steps: ['Mix flour, ghee, kalonji, salt, and sugar. Rub the ghee into the flour with your fingers until it resembles breadcrumbs.', 'Add cold water gradually and knead into a firm (not soft) dough. Cover and rest for 20 minutes.', 'Roll out the dough thinly (2–3mm). Cut into diamond shapes using a knife.', 'Heat oil in a deep pan to 160°C — medium heat. You want a slow fry.', 'Fry the nimki in small batches, turning occasionally, until pale golden and crisp (about 5–7 minutes).', 'Drain on paper towels. They will crisp further as they cool.', 'Store in an airtight tin for up to 2 weeks.'],
         note: 'The key to nimki is patience — low and slow frying gives the trademark crispness. If the oil is too hot they brown before crisping through.'
       },
-      'mediterranean-fish-fry': {
-        tag: 'Meat & Fish', emoji: '🐟',
-        name: 'Mediterranean Fish Fry',
-        meta: ['⏱ 20 min', '🍽 Serves 4', '⭐ 5.0'],
-        desc: 'Tilapia fillets coated in a smoky, herb-spiced rub and pan-fried in olive oil until golden. Quick, fragrant, and — as the recipe card says — well liked by all 3. Serve with tzatziki for a fresh finish.',
-        ingredients: ['4 tilapia fillets', '1 tsp paprika', '1 tsp smoked paprika', '1 tsp garlic powder', '1 tsp dried thyme', '1 tsp dried oregano', 'Salt to taste', '2–3 tbsp olive oil (for the rub, plus a little extra for frying)'],
-        steps: ['Wash the fish fillets and pat them completely dry with kitchen paper — this helps the spice rub stick and gives a better crust.', 'Mix together the paprika, smoked paprika, garlic powder, dried thyme, dried oregano, and salt in a small bowl.', 'Add enough olive oil to the spice mix to make a thick paste (about 1–2 tbsp). Stir well.', 'Rub the spice paste all over both sides of each fillet. Let them sit for 5–10 minutes to absorb the flavours.', 'Heat a little olive oil in a non-stick frying pan over medium-high heat. When hot, add the fillets.', 'Fry for 3–4 minutes per side without moving them, until golden and cooked through. The fish is ready when it flakes easily with a fork.', 'Serve immediately with tzatziki sauce and a simple salad or warm flatbread.'],
-        note: 'Tilapia cooks quickly — do not overcook or it will dry out. The smoked paprika is what gives this dish its depth, so do not skip it in favour of plain paprika alone.'
-      },
       'sandesh': {
         tag: 'Dessert', emoji: '🍬',
         name: 'Sandesh',
@@ -466,6 +466,15 @@
         ingredients: ['1 litre full-fat milk', '3 tbsp lemon juice or white vinegar', '80g icing sugar (adjust to taste)', '½ tsp cardamom powder', 'A few strands of saffron (optional)', 'Pistachios to garnish'],
         steps: ['Bring milk to a boil. Add lemon juice gradually, stirring, until the milk curdles completely. Stop adding acid once the whey is clear.', 'Strain through a muslin cloth. Rinse the chhana under cold water to remove sourness. Squeeze well.', 'Hang the chhana in the cloth for 30 minutes until most moisture is removed.', 'Knead the chhana on a clean surface with the heel of your palm for 8–10 minutes until completely smooth and pliable.', 'Place in a heavy pan over very low heat. Add icing sugar and cardamom. Stir constantly for 5–7 minutes until the mixture comes together and leaves the sides of the pan. Do not overcook.', 'Cool slightly, then shape into small rounds or press into moulds. Garnish with a pistachio.', 'Refrigerate for 1–2 hours before serving. Best eaten the same day.'],
         note: 'The texture of the finished sandesh depends entirely on how long you knead the chhana and how you cook it. Undercook it for a softer, fudgier result; cook a little longer for a firmer sweet.'
+      },
+       'shorshe-ilish': {
+        tag: 'Bengali Classic', emoji: '🐟',
+        name: 'Shorshe Ilish',
+        meta: ['⏱ 40 min', '🍽 Serves 4', '⭐ 4.9'],
+        desc: 'Hilsa fish in a fragrant mustard and poppy seed gravy — the quintessential Bengali monsoon dish. My mother made this every time it rained.',
+        ingredients: ['4 pieces hilsa fish, cleaned', '3 tbsp yellow mustard seeds', '1 tbsp poppy seeds (posto)', '3–4 green chillies', '1 tsp turmeric', '1 tsp salt', '3 tbsp mustard oil', '½ cup water'],
+        steps: ['Grind mustard seeds, poppy seeds, and 2 green chillies with a little water into a smooth paste.', 'Marinate fish with ½ tsp turmeric and ½ tsp salt for 10 minutes.', 'Heat mustard oil in a pan until it just starts to smoke, then reduce heat.', 'Add the mustard-poppy paste, remaining turmeric, salt, and green chillies. Stir for 2 minutes.', 'Add water and bring to a gentle simmer. Slide in the fish pieces.', 'Cover and cook on low heat for 12–15 minutes until fish is cooked through.', 'Finish with a drizzle of raw mustard oil and serve with steamed rice.'],
+        note: 'The pungency of mustard oil is essential here — do not substitute. The fish should be just cooked, never overdone.'
       }
     };
 
